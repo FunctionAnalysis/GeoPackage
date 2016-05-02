@@ -29,7 +29,7 @@
 
 		<h3>Scope</h3>
 		<p>Read-write</p>
-		
+
 		<h3>Requirements</h3>
 
 		<h4>GeoPackage</h4>
@@ -65,8 +65,6 @@
 		<p>The Table Index Table contains indexed feature table names and the timestamp of when they were last indexed.
 			The <code>last_indexed</code> value can be compared against the the <code>gpkg_contents</code> table <code>last_change</code> value to check if the index is up to date.</p>
 
-			<p><a href="https://github.com/ngageoint/geopackage-core-java/blob/master/src/main/resources/sql/nga_table_index">Table Definition SQL</a></p>
-
 			<table border="1">
 				<caption><code>nga_table_index</code></caption>
 				<thead>
@@ -99,14 +97,19 @@
 				</tbody>
 			</table>
 
+			<pre><code>
+CREATE TABLE nga_table_index (
+  table_name TEXT NOT NULL PRIMARY KEY,
+  last_indexed DATETIME
+);</code></pre>
+
+
 			<h5>Geometry Index Table</h5>
 
 			<p>The Geometry Index Table contains the min and max range of x, y, z, and m values for geometries in a feature user data table.
 				The <code>table_name</code> column is a foreign key to the <code>nga_table_index</code> table.
 				The <code>geom_id</code> column contains the <code>id</code> column value of the feature user data table.
 				The z and m values are optional.</p>
-
-				<p><a href="https://github.com/ngageoint/geopackage-core-java/blob/master/src/main/resources/sql/nga_geometry_index">Table Definition SQL</a></p>
 
 				<table border="1">
 					<caption><code>nga_geometry_index</code></caption>
@@ -203,6 +206,22 @@
 						</tr>
 					</tbody>
 				</table>
+
+				<pre><code>
+CREATE TABLE nga_geometry_index (
+  table_name TEXT NOT NULL,
+  geom_id INTEGER NOT NULL,
+  min_x DOUBLE NOT NULL,
+  max_x DOUBLE NOT NULL,
+  min_y DOUBLE NOT NULL,
+  max_y DOUBLE NOT NULL,
+  min_z DOUBLE,
+  max_z DOUBLE,
+  min_m DOUBLE,
+  max_m DOUBLE,
+  CONSTRAINT pk_ngi PRIMARY KEY (table_name, geom_id),
+  CONSTRAINT fk_ngi_nti_tn FOREIGN KEY (table_name) REFERENCES nga_table_index(table_name)
+);</code></pre>
 
 				<h4>GeoPackage SQLite Configuration</h4>
 				<p>None</p>

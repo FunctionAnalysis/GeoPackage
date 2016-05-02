@@ -61,8 +61,6 @@
 
 	<p>The Feature Tile Link Table contains a user feature table and tile table name for linked tables.</p>
 
-	<p><a href="https://github.com/ngageoint/geopackage-core-java/blob/master/src/main/resources/sql/nga_feature_tile_link">Table Definition SQL</a></p>
-
 	<table border="1">
 		<caption><code>nga_feature_tile_link</code></caption>
 		<thead>
@@ -94,6 +92,13 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<pre><code>
+CREATE TABLE nga_feature_tile_link (
+  feature_table_name TEXT NOT NULL,
+  tile_table_name TEXT NOT NULL,
+  CONSTRAINT pk_nftl PRIMARY KEY (feature_table_name, tile_table_name)
+);</code></pre>
 
 	<h4>GeoPackage SQLite Configuration</h4>
 	<p>None</p>
