@@ -5,7 +5,7 @@
 	<title>Geometry Index</title>
 </head>
 <body>
-	
+
 	<h3>Extension Title</h3>
 	<p>Geometry Index</p>
 
@@ -29,7 +29,7 @@
 
 		<h3>Scope</h3>
 		<p>Read-write</p>
-
+		
 		<h3>Requirements</h3>
 
 		<h4>GeoPackage</h4>
@@ -64,6 +64,8 @@
 
 		<p>The Table Index Table contains indexed feature table names and the timestamp of when they were last indexed.
 			The <code>last_indexed</code> value can be compared against the the <code>gpkg_contents</code> table <code>last_change</code> value to check if the index is up to date.</p>
+
+			<p><a href="https://github.com/ngageoint/geopackage-core-java/blob/master/src/main/resources/sql/nga_table_index">Table Definition SQL</a></p>
 
 			<table border="1">
 				<caption><code>nga_table_index</code></caption>
@@ -103,6 +105,8 @@
 				The <code>table_name</code> column is a foreign key to the <code>nga_table_index</code> table.
 				The <code>geom_id</code> column contains the <code>id</code> column value of the feature user data table.
 				The z and m values are optional.</p>
+
+				<p><a href="https://github.com/ngageoint/geopackage-core-java/blob/master/src/main/resources/sql/nga_geometry_index">Table Definition SQL</a></p>
 
 				<table border="1">
 					<caption><code>nga_geometry_index</code></caption>
@@ -205,6 +209,9 @@
 
 				<h4>GeoPackage SQLite Extension</h4>
 				<p>None</p>
+
+				<h4>Examples</h4>
+				<p>The <a href="../../examples/rivers.gpkg">rivers</a> GeoPackage has a <code>rivers</code> feature table that is indexed.</p>
 
 			</body>
 			</html>
